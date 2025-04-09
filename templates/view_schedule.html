@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Schedules</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4ECE7;
+            color: #5E0B1C;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #9B174C;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            margin-bottom: 40px;
+            border-collapse: collapse;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .schedule-table th {
+            background-color: #D84376;
+            color: #fff;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background-color: #F4ECE7;
+        }
+
+        .schedule-table tr:nth-child(odd) {
+            background-color: #E8A5B6;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #9B174C;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #5E0B1C;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-calendar-alt"></i> My Schedules</h1>
+
+    <h2>📌 My Daily Tasks</h2>
+    <table class="schedule-table">
+        <tr>
+            <th>Task</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.name }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>{{ task.status }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No tasks available.</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>📚 My Class Schedule</h2>
+    <table class="schedule-table">
+        <tr>
+            <th>Module</th>
+            <th>Time</th>
+            <th>Venue</th>
+        </tr>
+        {% for schedule in class_schedule %}
+        <tr>
+            <td>{{ schedule.module_name }}</td>
+            <td>{{ schedule.time }}</td>
+            <td>{{ schedule.venue }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No class schedule available.</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>🎓 My Tutorial Schedule</h2>
+    <table class="schedule-table">
+        <tr>
+            <th>Module</th>
+            <th>Day</th>
+            <th>Time</th>
+        </tr>
+        {% for tutorial in tutorial_schedule %}
+        <tr>
+            <td>{{ tutorial.module_name }}</td>
+            <td>{{ tutorial.day }}</td>
+            <td>{{ tutorial.time }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No tutorial schedule available.</td></tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'wellness_check' %}" class="back-button" style="margin-right: 10px;">
+        <i class="fas fa-heartbeat"></i> Check Wellness
+    </a>
+    <a href="{% url 'task_management' %}" class="back-button"><i class="fas fa-arrow-left"></i> Back to Task Management</a>
+</body>
+</html>

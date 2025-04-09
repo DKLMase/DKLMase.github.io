@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Student Academics & Wellness</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #a59da0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      animation: slideUp 0.6s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(0); }
+    }
+
+    .container {
+      background-color: #beb5bb;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 400px;
+      animation: slideIn 0.8s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #9B174C;
+      margin-bottom: 25px;
+      font-size: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px 14px 14px;
+      border-radius: 12px;
+      border: 1px solid #8f8888;
+      background-color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .form-group i {
+      position: absolute;
+      right: 12px;
+      top: 70%;
+      transform: translateY(-50%);
+      color: #9B174C;
+      font-size: 18px;
+    }
+
+    .btn {
+      background-color: #9B174C;
+      color: white;
+      border: none;
+      padding: 16px;
+      width: 60%;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+      font-weight: bolder;
+      margin: 20px auto 0; /* This centers the button */
+    }
+
+    .btn:hover {
+      background-color: #D84376;
+      transform: translateY(-2px);
+    }
+
+    .extra-links {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .extra-links a {
+      color: #5E0B1C;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    label {
+      display: block;
+      font-weight: bolder;
+      margin-bottom: 2px;
+      color: #5E0B1C;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="id_username">Username</label>
+        {{ form.username }}
+        <i class="fas fa-user"></i>
+      </div>
+
+      <div class="form-group">
+        <label for="id_password">Password</label>
+        {{ form.password }}
+        <i class="fas fa-lock"></i>
+      </div>
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="extra-links">
+      <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+      <p>Don't have an account? <a href="{% url 'register' %}">Register Here</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

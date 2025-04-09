@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <!-- Adding icons (Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* Basic Styles */
+    body {
+      background: #a59da0;
+      color: #5E0B1C;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      padding-top: 80px; /* Adjusted for fixed nav */
+      padding-bottom: 60px; /* Adjusted for fixed footer */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      position: relative; /* Needed for fixed elements */
+    }
+
+    /* Navigation panel */
+    .nav-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #9B174C;
+      padding: 10px 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed; /* Fix to the top */
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-panel span {
+      font-size: 18px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Container for the buttons */
+    .button-container {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Logout button */
+    .logout-btn, .wellness-check-btn {
+      background-color: #D84376;
+      padding: 10px 20px;  /* Adjusted padding */
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      display: flex;
+      align-items: center; /* Align icon and text properly */
+      justify-content: center;
+      margin-left: 10px; /* Space between buttons */
+    }
+
+    .logout-btn i, .wellness-check-btn i {
+      margin-right: 5px;  /* Space between icon and text */
+    }
+
+    .logout-btn:hover, .wellness-check-btn:hover {
+      background-color: #9B174C;
+    }
+
+    /* Banner styling */
+    .banner {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #5E0B1C;
+    }
+
+    h2 {
+      color: #9B174C;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Table Styling */
+    table {
+      width: 80%;
+      margin: 20px auto; /* Reduced space between table and previous content */
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 2px solid #696464; /* White borders for variable columns */
+      padding: 12px 18px;
+      background: white;
+      text-align: center;
+      font-weight: normal;
+    }
+
+    th {
+      background-color: #9B174C;
+      color: white;
+      font-weight: bold;
+    }
+
+    td {
+      font-weight: normal;
+    }
+
+    /* Centering icons above table headings */
+    .table-heading {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .table-heading i {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* Footer with Social Media Links */
+    .footer {
+      background-color: #9B174C;
+      padding: 20px;
+      text-align: center;
+      border-radius: 6px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .footer a {
+      color: white;
+      font-size: 30px;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #D84376;
+    }
+
+    /* Scrollable content */
+    .content {
+      margin-top: 120px; /* Ensure content starts below the fixed nav panel */
+      margin-bottom: 60px; /* Space for footer */
+      padding: 20px;
+      overflow-y: auto; /* Allow scrolling for the content */
+      max-height: 100vh; /* Prevent content from overflowing */
+    }
+
+    /* Centering the image */
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px; /* Reduced space between banner and image */
+    }
+
+    .image {
+      width: 200px; /* Adjust the size */
+      height: 200px; /* Adjust the size */
+      object-fit: cover; /* Ensures the image fits without distortion */
+      border-radius: 50%; /* Optional, for a circular image */
+      margin-bottom: 10px; /* Reduce the space below the image */
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      table {
+        width: 100%;
+      }
+
+      th, td {
+        padding: 8px 10px;
+      }
+
+      .nav-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .button-container {
+        margin-top: 10px;
+      }
+
+      .footer {
+        position: relative;
+        padding: 10px;
+      }
+
+      .image {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Panel -->
+  <div class="nav-panel">
+    <span><i class="fas fa-tasks"></i> Dashboard</span>
+    <div class="button-container">
+      <!-- Wellness Check button first, then Logout button -->
+      <a href="{% url 'wellness_check' %}" class="wellness-check-btn"><i class="fas fa-heartbeat"></i> Wellness Check</a>
+      <a href="{% url 'logout' %}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </div>
+
+  <!-- Banner Message -->
+  <div class="banner">
+    You are a work in progress, remember your potential
+  </div>
+
+  <!-- Static Image Below Banner -->
+  <div class="image-container">
+    <img src="{% static 'main/easyPic.jpeg' %}" alt="Your Image" class="image">
+  </div>
+
+  <!-- Content Wrapper (Scrollable Area) -->
+  <div class="content">
+    <!-- Daily Tasks Section -->
+    <h2><i class="fas fa-tasks"></i> MY DAILY TASKS</h2>
+    <table>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Day</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reminder</th>
+      </tr>
+      {% for task in daily_tasks %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.day }}</td>
+          <td>{{ task.date }}</td>
+          <td>{{ task.time }}</td>
+          <td>{{ task.reminder|yesno:"Yes,No" }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <!-- Class Schedule Section -->
+    <h2><i class="fas fa-chalkboard-teacher"></i> MY CLASS SCHEDULE</h2>
+    <table>
+      <tr>
+        <th>Module</th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Venue</th>
+      </tr>
+      {% for c in class_schedule %}
+        <tr>
+          <td>{{ c.module }}</td>
+          <td>{{ c.day }}</td>
+          <td>{{ c.time }}</td>
+          <td>{{ c.venue }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <!-- Tutorial Schedule Section -->
+    <h2><i class="fas fa-book-open"></i> MY TUTORIAL SCHEDULE</h2>
+    <table>
+      <tr>
+        <th>Module</th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Venue</th>
+        <th>Reminder</th>
+      </tr>
+      {% for t in tutorial_schedule %}
+        <tr>
+          <td>{{ t.module }}</td>
+          <td>{{ t.day }}</td>
+          <td>{{ t.time }}</td>
+          <td>{{ t.venue }}</td>
+          <td>{{ t.reminder|yesno:"Yes,No" }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- Footer with Social Media Links -->
+  <div class="footer">
+    <a href="https://www.facebook.com" target="_blank" style="color:white;"><i class="fab fa-facebook"></i> Facebook</a>
+    &nbsp;&nbsp;
+    <a href="https://www.instagram.com" target="_blank" style="color:white;"><i class="fab fa-instagram"></i> Instagram</a>
+    &nbsp;&nbsp;
+    <a href="https://www.twitter.com" target="_blank" style="color:white;"><i class="fab fa-twitter"></i> Twitter</a>
+  </div>
+
+</body>
+</html>

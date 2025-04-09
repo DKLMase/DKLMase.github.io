@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Check Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #F4ECE7;
+            color: #5E0B1C;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        h2 {
+            color: #9B174C;
+            text-align: center;
+        }
+        .wellness-result {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .wellness-result p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .wellness-result a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #9B174C;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .wellness-result a:hover {
+            background-color: #D84376;
+        }
+        .suggestion {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #FFEBEE;
+            border: 1px solid #FFCDD2;
+            border-radius: 6px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Wellness Check Result</h2>
+
+    <div class="wellness-result">
+        <p>Thank you for completing the wellness check, <strong>{{ wellness_check.user.username }}</strong>!</p>
+
+        <p><strong>Your mood:</strong> {{ wellness_check.mood }}</p>
+        <p><strong>Your stress level:</strong> {{ wellness_check.stress_level }}</p>
+        <p><strong>Your tiredness level:</strong> {{ wellness_check.tiredness_level }}</p>
+        <p><strong>Additional notes:</strong> {{ wellness_check.notes }}</p>
+
+        {% if suggestion %}
+            <div class="suggestion">
+                <p><strong>Suggestion:</strong> {{ suggestion }}</p>
+            </div>
+        {% endif %}
+
+        <a href="{% url 'wellness_check' %}">Go Back to Wellness Check</a>
+    </div>
+
+</body>
+</html>
